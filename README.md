@@ -1,5 +1,5 @@
 # GifTastic
 
-##Creating a dynamic gif creation page using the Giphy API. 
+## Creating a dynamic gif creation page using the Giphy API.
 
-###Homework 6.
+### Homework 6.

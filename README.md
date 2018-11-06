@@ -1,2 +1,5 @@
 # GifTastic
-Creating a dynamic gif page using the Giphy API. Week 6 homework.
+
+##Creating a dynamic gif creation page using the Giphy API. 
+
+###Homework 6.

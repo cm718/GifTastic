@@ -3,7 +3,7 @@ $(document).ready(function() {
   var api = "https://api.giphy.com/v1/gifs/search?q=";
   var key = "&api_key=twXD95cHwEaRmsSFNbYwKcB0UcQfahBF&limit=10";
   var list = ["cat", "dog", "monkey", "piggy", "kitten", "whale", "otter",
-    "goose", "snake", "hippo", "gerbil", "gorilla", "shark", "puppy",
+    "goose", "snake", "hippo", "gorilla", "shark", "puppy",
     "moose", "salamander", "horse", "goldfish", "dolphin"];
   var newButton;
 

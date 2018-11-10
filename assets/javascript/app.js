@@ -1,33 +1,63 @@
 $(document).ready(function() {
 
-var api = "https://api.giphy.com/v1/gifs/search?q=";
-var key = "&api_key=twXD95cHwEaRmsSFNbYwKcB0UcQfahBF&limit=10";
-var list = ["cat", "dog", "monkey", "piggy", "otter"];
+  var api = "https://api.giphy.com/v1/gifs/search?q=";
+  var key = "&api_key=twXD95cHwEaRmsSFNbYwKcB0UcQfahBF&limit=10";
+  var list = ["cat", "dog", "monkey", "piggy", "otter",
+    "goose", "snake", "hippo", "gerbil", "shark", "goldfish", "dolphin"
+  ];
+  var newButton;
 
-function putButtons(){
-  for (var i = 0; i < list.length; i++){
-    // Create a button tag and assign it to a variable
-    var newButton = $("<button>");
+  // Function to put all the buttons from the array into the html
+  function renderButtons() {
+    // Deleting the buttons prior to adding new buttons
+    $("#put-buttons-here").empty();
 
+    // Looping through the array of animals
+    for (var i = 0; i < list.length; i++) {
 
+    // Dynamically generate buttons for each animal in the array
+      // Create the button element
+      var b = $("<button>");
+      // Adding a class of animal button
+      b.addClass("animal-button");
+      // Adding a data-attribute
+      b.attr("data-name", list[i]);
+      // Providing the initial button text
+      b.text(list[i]);
+      // Adding the button to the put-buttons-here div
+      $("#put-buttons-here").append(b);
+    }
   }
-}
 
-$("#gif-maker").on("click", function(){
-  // Grab and store the input value from the user
-  var animal = $("#animal-input").val().trim();
-  console.log(animal);
+  // Function to add user input to the list array
+  function addButton(){
+    // Make a varialbe to grab the text of the input
+    var input = $("#animal-input").val();
+    // Add the new user input to the list array
+    list.push(input);
+    // Run the renderButtons function to add the button to the html
+    renderButtons();
+    // Empty out the user input field
+    $("#animal-input").val("");
+  }
 
+  function displayGifs() {
+    // First empty the div if it is not already
+    $("#put-gifs-here").empty();
 
+    // Grab and store the input value from the user
+    var animal = $(this).text();
+    console.log($(this));
+    console.log(animal);
 
-  // Construct the queryURL with the input value
-  var queryURL = api + animal + key;
+    // Construct the queryURL with the input value
+    var queryURL = api + animal + key;
 
-  // Make the AJAX call with the newly made queryURL
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).then(function(response){
+    // Make the AJAX call with the newly made queryURL
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
       console.log(queryURL);
       console.log(response);
 
@@ -35,7 +65,7 @@ $("#gif-maker").on("click", function(){
       var results = response.data;
 
       // Loop through the results
-      for (var i = 0; i < results.length; i++){
+      for (var i = 0; i < results.length; i++) {
 
         // Create and store a div tag into a variable called animalDiv
         var animalDiv = $("<div>");
@@ -47,7 +77,9 @@ $("#gif-maker").on("click", function(){
         var animalImage = $("<img>");
 
         // Set the src attribute of the image to the property of the result
-        animalImage.attr("src", results[i].images.fixed_height.url);
+        animalImage.attr("src", results[i].images.fixed_height_still.url);
+        animalImage.attr("data-stil", results[i].images.fixed_height_still.url);
+        animalImage.attr("data-live", results[i].images.fixed_height.url);
 
         // Append the paragraph and image tags to the animalDiv
         animalDiv.append(p);
@@ -55,15 +87,14 @@ $("#gif-maker").on("click", function(){
 
         // Prepend the animalDiv to the HTML on the page
         $("#put-gifs-here").prepend(animalDiv);
-
       }
     });
-    // Empty out the user input field
-    $("#animal-input").val("");
-    console.log($("#animal-input"));
-});
+  };
 
-putButtons();
+  $("#button-maker").on("click", addButton);
 
+  $(document).on("click", ".animal-button", displayGifs);
+
+  renderButtons();
 
 });

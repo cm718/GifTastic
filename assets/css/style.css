@@ -1,4 +1,13 @@
 
+h1,
+h3 {
+  font-family: sans-serif;
+}
+
+.header {
+  text-align: center;
+}
+
 .spacer {
   padding: 5px;
   margin: 15px;
@@ -30,6 +39,12 @@ img:hover {
 
 p {
   margin-left: 10px;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: sans-serif;
 }
 
 #put-gifs-here {

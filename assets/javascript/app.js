@@ -30,7 +30,7 @@ $(document).ready(function() {
   }
 
   // Function to add user input to the list array
-  function addButton(){
+  function addButton() {
     // Make a varialbe to grab the text of the input
     var input = $("#animal-input").val();
     // Add the new user input to the list array
@@ -41,14 +41,13 @@ $(document).ready(function() {
     $("#animal-input").val("");
   }
 
+  // Function to render the gifs into the html and apply their attributes
   function displayGifs() {
     // First empty the div if it is not already
     $("#put-gifs-here").empty();
 
     // Grab and store the input value from the user
     var animal = $(this).text();
-    console.log($(this));
-    console.log(animal);
 
     // Construct the queryURL with the input value
     var queryURL = api + animal + key;
@@ -58,8 +57,6 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(queryURL);
-      console.log(response);
 
       // Store the results from the AJAX call into a variable
       var results = response.data;
@@ -78,7 +75,7 @@ $(document).ready(function() {
 
         // Set the src attribute of the image to the property of the result
         animalImage.attr("src", results[i].images.fixed_height_still.url);
-        animalImage.attr("data-stil", results[i].images.fixed_height_still.url);
+        animalImage.attr("data-still", results[i].images.fixed_height_still.url);
         animalImage.attr("data-live", results[i].images.fixed_height.url);
 
         // Append the paragraph and image tags to the animalDiv
@@ -91,9 +88,24 @@ $(document).ready(function() {
     });
   };
 
+  // Function to flip between still and live on click of images
+  function flipState() {
+    var source = $(this).attr("src");
+    var still = $(this).attr("data-still");
+    var live = $(this).attr("data-live");
+    if (source === still){
+      $(this).attr("src", live);
+    }
+    else {
+      $(this).attr("src", still);
+    }
+  }
+
   $("#button-maker").on("click", addButton);
 
   $(document).on("click", ".animal-button", displayGifs);
+
+  $(document).on("click", "img", flipState);
 
   renderButtons();
 

@@ -26,6 +26,13 @@ button {
   margin-left: 3px;
   font-size: 15px;
   border-radius: 8px;
+  box-shadow: 1px 1px #888;
+}
+
+button:hover {
+  position: relative;
+  top: -2px;
+  cursor: pointer;
 }
 
 img {
@@ -34,7 +41,6 @@ img {
 
 img:hover {
   cursor: pointer;
-  position: relative;
 }
 
 p {

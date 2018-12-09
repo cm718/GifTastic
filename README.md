@@ -1,6 +1,6 @@
 # GifTastic
 
-## Create a dynamic gif creation page using the Giphy API.
+## Create a dynamic page of cute animal gifs using the Giphy API.
 
 ### Click a preset button of a cute animal and watch the page fill with gifs. Or you can add a button of your own that will search the Giphy api.
 
